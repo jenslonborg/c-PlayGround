@@ -1,33 +1,35 @@
 ﻿using System;
 using RectangleApplication;
 using PerfectSquareApplication;
+using RegisteryApplication;
+using eulerProblmsApplication;
+using InterviewQuestionApplication;
 
 namespace Tutorial1
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            //Hello World
-            Console.WriteLine("Hello World!");
-            //Basics
-            Rectangle r = new Rectangle();
-            r.Acceptdetails();
-            r.Display();
-            r.SetDetails(1.1, 3.1);
-            r.Display();
-            //Some fun
-            PerfectSquare perf = new PerfectSquare();
-            for (double n = 1; n <= 100000; n++)
-            {
-                double candidate = n * n + 45;
-                if (perf.IsPerfect(candidate))
-                {
-                    Console.WriteLine("{0} gives a perfect square. It is {1} -> {2}", n, candidate, Math.Sqrt(candidate));
-                }
-            }
-            Console.WriteLine("Found all perfect Squares");
-            Console.ReadKey();
+            eulerProblms jens = new eulerProblms();
+            //int N = 10001;
+            //Console.WriteLine("The {0}'th prime is: {1}", N, jens.GiveMeNthPrime(N));
+            //jens.problem8();
+            //jens.problem9();
+            //jens.problem10();
+            //jens.problem11();
+            //jens.problem12();
+            //jens.problem13();
+            //jens.problem14();
+            //jens.problem15();
+            //jens.problem17();
+            //jens.problem19();
+            //jens.problem20();
+            jens.problem22();
+            //interViewQuestion jens2 = new interViewQuestion();
+            //double pi = jens2.GiveMePi();
+
+            Console.Read();
         }
     }
 }

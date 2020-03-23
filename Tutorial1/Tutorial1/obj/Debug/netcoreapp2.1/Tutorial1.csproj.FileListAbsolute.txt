@@ -3,9 +3,9 @@ C:\Git\c-PlayGround\Tutorial1\Tutorial1\bin\Debug\netcoreapp2.1\Tutorial1.runtim
 C:\Git\c-PlayGround\Tutorial1\Tutorial1\bin\Debug\netcoreapp2.1\Tutorial1.runtimeconfig.dev.json
 C:\Git\c-PlayGround\Tutorial1\Tutorial1\bin\Debug\netcoreapp2.1\Tutorial1.dll
 C:\Git\c-PlayGround\Tutorial1\Tutorial1\bin\Debug\netcoreapp2.1\Tutorial1.pdb
-C:\Git\c-PlayGround\Tutorial1\Tutorial1\obj\Debug\netcoreapp2.1\Tutorial1.csprojAssemblyReference.cache
 C:\Git\c-PlayGround\Tutorial1\Tutorial1\obj\Debug\netcoreapp2.1\Tutorial1.csproj.CoreCompileInputs.cache
 C:\Git\c-PlayGround\Tutorial1\Tutorial1\obj\Debug\netcoreapp2.1\Tutorial1.AssemblyInfoInputs.cache
 C:\Git\c-PlayGround\Tutorial1\Tutorial1\obj\Debug\netcoreapp2.1\Tutorial1.AssemblyInfo.cs
 C:\Git\c-PlayGround\Tutorial1\Tutorial1\obj\Debug\netcoreapp2.1\Tutorial1.dll
 C:\Git\c-PlayGround\Tutorial1\Tutorial1\obj\Debug\netcoreapp2.1\Tutorial1.pdb
+C:\Git\c-PlayGround\Tutorial1\Tutorial1\obj\Debug\netcoreapp2.1\Tutorial1.csprojAssemblyReference.cache
