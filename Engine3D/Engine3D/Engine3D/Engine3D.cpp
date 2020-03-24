@@ -65,17 +65,16 @@ public:
         myMazeHeight = 20;
         myMazeWidth = 40;
         myPathWidth = 3;
+        myPosition = make_pair(0, 0);
         myMaze = new int[myMazeHeight * myMazeWidth];
         //memset sets the 'myMazeWidth * myMazeHeight' first bytes in myMAze to 0
         memset(myMaze, 0x00, myMazeWidth * myMazeHeight * sizeof(int));
         myStack.push(make_pair(0, 0));
         myMaze[0] = CELL_VISITED;
         myVisitedCells = 1;
-        return true;
-    }
-    bool OnUserUpdate(float fElapsedTime) override
-    {   
-        if (myVisitedCells < myMazeHeight * myMazeWidth)
+        //Build Maze
+        srand(time(NULL));
+        while (myVisitedCells < myMazeHeight * myMazeWidth)
         {
             auto offset = [&](int x, int y)
             {
@@ -122,6 +121,8 @@ public:
             }
             if (!neighboursNotVisited.empty())
             {
+                //Change the seed to generate different maze all the time
+
                 int nextCellDir = neighboursNotVisited[rand() % neighboursNotVisited.size()]; // rand() % neighboursNotVisited.size() vill be rand int from size 0 to neighboursNotVisited.size()
                 switch (nextCellDir)
                 {
@@ -149,18 +150,48 @@ public:
 
                 myMaze[offset(0, 0)] |= CELL_VISITED; // Tell the maze cell it has been visited
                 myVisitedCells++;
+
             }
             else
             {
                 myStack.pop();
             }
         }
+        return true;
+    }
+    bool OnUserUpdate(float fElapsedTime) override
+    {   
+        Sleep(100);
+        //Find new myNewPosition
+        if (m_keys[VK_DOWN].bPressed || m_keys[VK_DOWN].bHeld)
+        {
+            if ((myMaze[myPosition.first + myPosition.second * myMazeWidth] & CELL_PATH_S) != 0)
+                myPosition.second += 1;
+        }
+        if (m_keys[VK_UP].bPressed || m_keys[VK_UP].bHeld)
+        {
+            if ((myMaze[myPosition.first + myPosition.second * myMazeWidth] & CELL_PATH_N) != 0)
+                myPosition.second -= 1;
+        }
+        if (m_keys[VK_RIGHT].bPressed || m_keys[VK_RIGHT].bHeld)
+        {
+            if ((myMaze[myPosition.first + myPosition.second * myMazeWidth] & CELL_PATH_E) != 0)
+                myPosition.first += 1;
+        }
+        if (m_keys[VK_LEFT].bPressed || m_keys[VK_LEFT].bHeld)
+        {
+            if ((myMaze[myPosition.first + myPosition.second * myMazeWidth] & CELL_PATH_W) != 0)
+                myPosition.first -= 1;
+        }
+
+        //Draw Maze
         Fill(0, 0, m_nScreenWidth, m_nScreenHeight, L' ');
         for (int x = 0; x < myMazeWidth; x++)
         {
             for (int y = 0; y < myMazeHeight; y++)
             {
                 //Bitwise comparitor "&" returns 1 if and only if both inpus are 1
+                //Fill center
                 for (int m = 0; m < myPathWidth; m++)
                 {
                     for (int n = 0; n < myPathWidth; n++)
@@ -169,8 +200,13 @@ public:
                             Draw(x * (myPathWidth+1) + m, y * (myPathWidth+1) + n, PIXEL_SOLID, FG_WHITE);
                         else
                             Draw(x * (myPathWidth+1) + m, y * (myPathWidth+1) + n, PIXEL_SOLID, FG_RED);
+                        //StartBox
+                        Draw(m,n, PIXEL_SOLID, FG_BLUE);
+                        //EndBox
+                        Draw((myMazeWidth*(myPathWidth+1)- (myPathWidth + 1))+m, (myMazeHeight*(myPathWidth + 1)- (myPathWidth + 1))+n, PIXEL_SOLID, FG_BLUE);
                     }
                 }
+                //Fill edges
                 for (int p = 0; p < myPathWidth; p++) 
                 {
                     if(myMaze[y * myMazeWidth + x] & CELL_PATH_S)
@@ -178,6 +214,14 @@ public:
                     if (myMaze[y * myMazeWidth + x] & CELL_PATH_E)
                         Draw(x * (myPathWidth + 1) + myPathWidth, y * (myPathWidth + 1) + p, PIXEL_SOLID, FG_WHITE);
                 }
+            }
+        }
+        //Draw myPosition
+        for (int m = 0; m < myPathWidth; m++)
+        {
+            for (int n = 0; n < myPathWidth; n++)
+            {
+                Draw(myPosition.first * (myPathWidth + 1) + m, myPosition.second * (myPathWidth + 1) + n, PIXEL_SOLID, FG_RED);
             }
         }
         return true;
@@ -198,7 +242,7 @@ private:
     int myPathWidth;
 
     stack<pair<int, int>> myStack;
-
+    pair<int, int> myPosition;
 };
 
 int main()
